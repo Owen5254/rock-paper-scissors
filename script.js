@@ -1,4 +1,8 @@
+const buttons = document.querySelectorAll('.theButton');
+const start_btn = document.querySelectorAll('.start');
 
+start_btn.addEventListener("click", game_start);
+buttons.forEach(button => button.addEventListener('click', playRound));
 	
 
 
@@ -7,21 +11,20 @@ function computerPlay() {
     switch (randomNumber){
         case 0:
             return "paper";
-            break;
+
         case 1:
             return "rock";
-            break;
+
         case 2:
             return "scissors";
-            break;
+
     }
 }
 
 function playRound () {
 
-    let playerSlection = prompt('Enter: ').toLowerCase();
+    let playerSlection = 
     let computerSelection = computerPlay();
-    console.log('playing');
     switch(playerSlection){
         case "paper":
             switch(computerSelection){
@@ -53,20 +56,24 @@ function playRound () {
     } 
 }
 
-function game(){
+function game_start(){
     let win_times = 0;
     let lose_times = 0;
     
-    // for (let i = 0; i < 5; i++){
-    //     let player_select = playRound();
-
-    //     if (player_select === "Win"){
-    //         win_times += 1;
-    //     }else if (player_select === "Lose") {
-    //         lose_times += 1;
-    //     }
-    // }
+    while (true) {
+        let result = playRound();
+        if (win_times === 5 || lose_times === 5) break;
+        else {
+            if ( result === "Win"){
+                win_times += 1;
+            }else if ( result === "Lose") {
+            lose_times += 1;
+            }
+        }
+        
+    }
     console.log(win_times);
+    
     if (win_times > lose_times){
         return "You win";
     }else{
@@ -79,5 +86,4 @@ function test(){
 }
 
 
-const buttons = document.querySelectorAll('.mybutton');
-buttons.forEach(button => button.addEventListener('click', test));
+
