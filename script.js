@@ -1,3 +1,7 @@
+
+	
+
+
 function computerPlay() {
     let randomNumber = Math.floor(Math.random() * 3);
     switch (randomNumber){
@@ -13,11 +17,11 @@ function computerPlay() {
     }
 }
 
-let playerSlection = prompt('Enter: ').toLowerCase();
+function playRound () {
 
-let computerSelection = computerPlay();
-
-function playRound(playerSlection, computerSelection) {
+    let playerSlection = prompt('Enter: ').toLowerCase();
+    let computerSelection = computerPlay();
+    console.log('playing');
     switch(playerSlection){
         case "paper":
             switch(computerSelection){
@@ -46,9 +50,34 @@ function playRound(playerSlection, computerSelection) {
                 case "scissors":
                     return "tie";
             }
-
     } 
 }
-console.log(computerSelection);
-console.log(playerSlection);
-console.log(playRound(playerSlection, computerSelection));
+
+function game(){
+    let win_times = 0;
+    let lose_times = 0;
+    
+    // for (let i = 0; i < 5; i++){
+    //     let player_select = playRound();
+
+    //     if (player_select === "Win"){
+    //         win_times += 1;
+    //     }else if (player_select === "Lose") {
+    //         lose_times += 1;
+    //     }
+    // }
+    console.log(win_times);
+    if (win_times > lose_times){
+        return "You win";
+    }else{
+        return "You lose"
+    }
+}
+
+function test(){
+    alert('Element clicked through function!');
+}
+
+
+const buttons = document.querySelectorAll('.mybutton');
+buttons.forEach(button => button.addEventListener('click', test));
