@@ -1,12 +1,18 @@
 const buttons = document.querySelectorAll('.theButton');
 const start_btn = document.querySelector('.start');
+let win_times = 0;
+let lose_times = 0;
 
 
 
 start_btn.addEventListener("click", game_start);
-buttons.forEach(button => button.addEventListener('click', getPlayerChoice));
-	
 
+	
+function game_start(){
+    win_times = 0;
+    lose_times = 0;
+    buttons.forEach(button => button.addEventListener('click', getPlayerChoice));
+}
 
 function computerPlay() {
     let randomNumber = Math.floor(Math.random() * 3);
@@ -24,71 +30,72 @@ function computerPlay() {
 }
 
 function playRound(playerSlection, computerSelection) {
-    
-    
+
+    let result = "";
+    console.log(playerSlection);
     switch(playerSlection){
         case "paper":
             switch(computerSelection){
                 case "paper":
-                    return "tie";
+                    result = "tie";
+                    break;
                 case "rock":
-                    return "Win";
+                    result = "Win";
+                    break;
                 case "scissors":
-                    return "Lose";
-            }
+                    result = "Lose";
+                    break;
+            }break;
         case "rock":
             switch(computerSelection){
                 case "paper":
-                    return "Lose";
+                    result = "Lose";
+                    break;
                 case "rock":
-                    return "tie";
+                    result = "tie";
+                    break;
                 case "scissors":
-                    return "Win";
-            }
+                    result = "Win";
+                    break;
+            }break;
         case "scissors":
             switch(computerSelection){
                 case "paper":
-                    return "Win";
+                    result = "Win";
+                    break;
                 case "rock":
-                    return "Lose";
+                    result = "Lose";
+                    break;
                 case "scissors":
-                    return "tie";
-            }
-    } 
+                    result = "tie";
+                    break;
+            }break;
+    }
+    console.log(result);
+    check_Winner(result); 
 }
 
-function check_Winner(){
-    let win_times = 0;
-    let lose_times = 0;
+function check_Winner(result){
     
-    // for ( var i=0; i<10; i++ ) {
-        
-    //     let result = playRound();
-    //     if (win_times === 5 || lose_times === 5) break;
-    //     else {
-    //         if ( result === "Win"){
-    //             win_times += 1;
-    //             console.log('win');
-    //         }else if ( result === "Lose") {
-    //             lose_times += 1;
-    //             console.log('lose');
-    //         }
-    //     }
-    //     console.log(result);
-    // }
+    switch(result){
+        case "Win":
+            win_times += 1;
+        case "Lose":
+            lose_times += 1;
+    }
     console.log(win_times);
-    
-    if (win_times > lose_times){
-        return "You win";
-    }else{
-        return "You lose"
+    if (win_times === 5 || lose_times === 5){
+        if (win_times >= lose_times){
+            console.log("You win");
+        }else {console.log('You Lose');}
+        game_start();
     }
 }
 function getPlayerChoice(e){
-
+    
     let playerSlection= e.target.textContent;
-    console.log(playerSlection);
     playRound(playerSlection, computerPlay());
+    
 }
 
 
