@@ -1,4 +1,4 @@
 # rock-paper-scissors
 
-Strat button => game_start() => playRound() => game_end()
+Strat button => game_start() => getPlayerChoice(e) => playRound() => check_Winner()
 
