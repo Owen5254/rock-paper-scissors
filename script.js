@@ -1,5 +1,8 @@
 const buttons = document.querySelectorAll('.theButton');
 const start_btn = document.querySelector('.start');
+const my_point = document.querySelector('.my_point');
+const com_point = document.querySelector('.com_point');
+
 let win_times = 0;
 let lose_times = 0;
 
@@ -11,6 +14,9 @@ start_btn.addEventListener("click", game_start);
 function game_start(){
     win_times = 0;
     lose_times = 0;
+    my_point.textContent = win_times;
+    com_point.textContent = lose_times;
+
     buttons.forEach(button => button.addEventListener('click', getPlayerChoice));
 }
 
@@ -80,10 +86,15 @@ function check_Winner(result){
     switch(result){
         case "Win":
             win_times += 1;
+            break;
         case "Lose":
             lose_times += 1;
+            break;
     }
-    console.log(win_times);
+    
+    my_point.textContent = win_times;
+    com_point.textContent = lose_times;
+
     if (win_times === 5 || lose_times === 5){
         if (win_times >= lose_times){
             console.log("You win");
