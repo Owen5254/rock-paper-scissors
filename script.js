@@ -2,6 +2,7 @@ const buttons = document.querySelectorAll('.theButton');
 const start_btn = document.querySelector('.start');
 const my_point = document.querySelector('.my_point');
 const com_point = document.querySelector('.com_point');
+const hint = document.querySelector('.hint');
 
 let win_times = 0;
 let lose_times = 0;
@@ -16,7 +17,7 @@ function game_start(){
     lose_times = 0;
     my_point.textContent = win_times;
     com_point.textContent = lose_times;
-
+    hint.textContent = "";
     buttons.forEach(button => button.addEventListener('click', getPlayerChoice));
 }
 
@@ -77,7 +78,7 @@ function playRound(playerSlection, computerSelection) {
                     break;
             }break;
     }
-    console.log(result);
+    hint.textContent = result;
     check_Winner(result); 
 }
 
@@ -99,7 +100,8 @@ function check_Winner(result){
         if (win_times >= lose_times){
             console.log("You win");
         }else {console.log('You Lose');}
-        game_start();
+        
+        dissable_listener();
     }
 }
 function getPlayerChoice(e){
@@ -108,5 +110,8 @@ function getPlayerChoice(e){
     playRound(playerSlection, computerPlay());
     
 }
-
+function dissable_listener(){
+    buttons.forEach(button => button.removeEventListener('click', getPlayerChoice));
+    start_btn.addEventListener("click", game_start);
+}
 
